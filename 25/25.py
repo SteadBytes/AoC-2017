@@ -43,6 +43,9 @@ In state (.):
         steps = int(re.search(r'after (\d+) steps', f.readline()).group(1))
 
         rules = re.findall(RULE_RE, f.read())
+        # States = Dict of state:list of tuple(value_to_write, direction, next_state):
+        # list[0] = when current value = 0, list[1] when current value = 1
+        # {'A':[('1','right','B'),('0','left','C')]...}
         states = {}
         for rule in rules:
             states[rule[0]] = [rule[1:4], rule[4:]]
